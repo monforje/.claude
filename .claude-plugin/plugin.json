@@ -1,0 +1,20 @@
+{
+  "name": "qa-suite",
+  "description": "QA orchestrator with nine specialised verification sub-agents and their skills",
+  "version": "0.1.0",
+  "agents": [
+    "./agents/qa.md",
+    "./agents/qa/qa-unit.md",
+    "./agents/qa/qa-integration.md",
+    "./agents/qa/qa-api.md",
+    "./agents/qa/qa-regression.md",
+    "./agents/qa/qa-e2e.md",
+    "./agents/qa/qa-load.md",
+    "./agents/qa/qa-profiling.md",
+    "./agents/qa/qa-security.md",
+    "./agents/qa/qa-usability-ui.md"
+  ],
+  "skills": [
+    "./skills/qa/unit-testing"
+  ]
+}
