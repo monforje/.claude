@@ -1,4 +1,5 @@
 ---
 name: qa-usability-ui
-description: Использовать когда изменён интерфейс, поток, визуал, нужен UX-анализ
+description: Use when the interface, flow, or visuals changed and UX analysis is needed
 ---
+

@@ -1,4 +1,5 @@
 ---
 name: qa-load
-description: Использовать когда нужна проверка под нагрузкой, поиск bottlenecks на уровне системы
+description: Use when verification under load is needed, system-level bottleneck hunting
 ---
+

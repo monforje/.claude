@@ -1,4 +1,5 @@
 ---
 name: qa-profiling
-description: Использовать когда нужно найти узкое место в конкретном участке кода
+description: Use when a bottleneck must be found in a specific piece of code
 ---
+

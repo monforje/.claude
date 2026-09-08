@@ -1,4 +1,5 @@
 ---
 name: qa-unit
-description: Использовать когда изменена одна функция/метод, нет внешних вызовов
+description: Use when a single function/method changed and there are no external calls
 ---
+

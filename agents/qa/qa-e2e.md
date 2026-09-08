@@ -1,4 +1,5 @@
 ---
 name: qa-e2e
-description: Использовать когда изменён полный пользовательский сценарий
+description: Use when a full user scenario changed
 ---
+

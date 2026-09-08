@@ -1,4 +1,5 @@
 ---
 name: qa-integration
-description: Использовать когда изменено взаимодействие модулей/БД/очередей
+description: Use when interaction between modules/DBs/queues changed
 ---
+

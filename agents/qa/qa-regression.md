@@ -1,4 +1,5 @@
 ---
 name: qa-regression
-description: Использовать когда есть риск поломки существующего функционала
+description: Use when there is a risk of breaking existing functionality
 ---
+

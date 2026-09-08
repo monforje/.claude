@@ -1,4 +1,5 @@
 ---
 name: qa-api
-description: Использовать когда изменён endpoint, контракт, бизнес-логика на уровне API
+description: Use when an endpoint, contract, or API-level business logic changed
 ---
+

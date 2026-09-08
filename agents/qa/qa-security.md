@@ -1,4 +1,5 @@
 ---
 name: qa-security
-description: Использовать когда нужна проверка уязвимостей, compliance, пентест
+description: Use when a vulnerability check, compliance, or pentest is needed
 ---
+
