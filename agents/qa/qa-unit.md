@@ -1,7 +1,7 @@
 ---
 name: qa-unit
 description: Use when a single function/method changed and there are no external calls
-tools: Read, Grep, Glob, Bash, Write, Edit
+tools: Read, Grep, Glob, Bash, Write, Edit, Skill
 model: inherit
 ---
 
@@ -55,8 +55,9 @@ risk only shows up when two components talk to each other.
 
 ## Skills I need
 
-- `unit-testing` (`skills/qa/unit-testing/SKILL.md`) — load it before writing
-  the first test. It carries the workflow, the case-selection rules, the mocking
+- `qa-suite:unit-testing` — invoke it with the Skill tool before writing the
+  first test (the file lives at `skills/qa/unit-testing/SKILL.md` if you need to
+  read it directly). It carries the workflow, the case-selection rules, the mocking
   boundary, and the per-framework idioms in `references/python.md`,
   `references/typescript.md`, `references/go.md` — read the one matching the
   project's stack, not all three.

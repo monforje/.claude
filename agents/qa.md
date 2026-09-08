@@ -30,24 +30,34 @@ Classifies the change, delegates verification to sub-agents in `./qa/`, merges t
 
 ## 2. Sub-agent selection
 
-| Level + Type | Subagent Path | When to pick |
+| Level + Type | Subagent | When to pick |
 | --- | --- | --- |
-| Unit + Functional | [qa-unit](./qa/qa-unit.md) | A single function/method changed, no external calls |
-| Integration + Functional | [qa-integration](./qa/qa-integration.md) | Interaction between modules/DBs/queues changed |
-| Integration + Functional | [qa-api](./qa/qa-api.md) | An endpoint, contract, or API-level business logic changed |
-| Any + Functional (strategy) | [qa-regression](./qa/qa-regression.md) | There is a risk of breaking existing functionality |
-| System + Functional | [qa-e2e](./qa/qa-e2e.md) | A full user scenario changed |
-| System + Non-functional (Performance) | [qa-load](./qa/qa-load.md) | Verification under load is needed, system-level bottleneck hunting |
-| Unit/Component + Non-functional (Performance) | [qa-profiling](./qa/qa-profiling.md) | A bottleneck must be found in a specific piece of code |
-| System/Code + Non-functional (Security) | [qa-security](./qa/qa-security.md) | Vulnerability check, compliance, pentest |
-| System + Non-functional + Functional (GUI) | [qa-usability-ui](./qa/qa-usability-ui.md) | Interface, flow, or visuals changed, UX analysis needed |
+| Unit + Functional | `qa-suite:qa-unit` ([file](./qa/qa-unit.md)) | A single function/method changed, no external calls |
+| Integration + Functional | `qa-suite:qa-integration` ([file](./qa/qa-integration.md)) | Interaction between modules/DBs/queues changed |
+| Integration + Functional | `qa-suite:qa-api` ([file](./qa/qa-api.md)) | An endpoint, contract, or API-level business logic changed |
+| Any + Functional (strategy) | `qa-suite:qa-regression` ([file](./qa/qa-regression.md)) | There is a risk of breaking existing functionality |
+| System + Functional | `qa-suite:qa-e2e` ([file](./qa/qa-e2e.md)) | A full user scenario changed |
+| System + Non-functional (Performance) | `qa-suite:qa-load` ([file](./qa/qa-load.md)) | Verification under load is needed, system-level bottleneck hunting |
+| Unit/Component + Non-functional (Performance) | `qa-suite:qa-profiling` ([file](./qa/qa-profiling.md)) | A bottleneck must be found in a specific piece of code |
+| System/Code + Non-functional (Security) | `qa-suite:qa-security` ([file](./qa/qa-security.md)) | Vulnerability check, compliance, pentest |
+| System + Non-functional + Functional (GUI) | `qa-suite:qa-usability-ui` ([file](./qa/qa-usability-ui.md)) | Interface, flow, or visuals changed, UX analysis needed |
+
+The `Subagent` value is the exact `subagent_type` to pass to Task. It is
+namespaced by the plugin, so it changes if the plugin is renamed in
+`.claude-plugin/plugin.json`.
+
+**Implementation status.** Only `qa-suite:qa-unit` has a body today; the other
+eight files carry frontmatter and nothing else, so delegating to them returns
+noise. Until they are written, if the change needs one of them, say so in the
+report ("integration risk not covered — qa-integration not implemented") rather
+than calling it and pretending the result means something.
 
 ## 3. Process
 
 1. **Context.** Run `git diff` against the base branch (or whatever the user named). Without a diff, picking a level is guesswork.
 2. **Classification.** Level follows the boundary of the change (one function? several components? a whole scenario?). Type follows the question that needs answering (does it work correctly vs how does it work).
 3. **Agent set.** Usually more than one: a changed endpoint is `qa-api` + `qa-regression`; a UI edit is `qa-usability-ui`, plus `qa-e2e` if a scenario is affected. Take the minimum that covers the real risk, not all nine.
-4. **Delegation.** One call per agent, independent ones in parallel within a single message. Pass along: changed files, what exactly changed, which question the agent answers.
+4. **Delegation.** One call per agent, independent ones in parallel within a single message. Use the `subagent_type` exactly as spelled in section 2. Pass along: changed files, what exactly changed, which question the agent answers.
 5. **Merge.** Drop duplicates, sort by severity, don't relay sub-agent answers verbatim.
 6. **Report.** Write the file per section 4 and give the user its path.
 

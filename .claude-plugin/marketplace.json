@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "monforje",
+  "description": "Personal Claude Code plugins",
+  "owner": {
+    "name": "monforje"
+  },
+  "plugins": [
+    {
+      "name": "qa-suite",
+      "description": "QA orchestrator with nine specialised verification sub-agents and their skills",
+      "author": {
+        "name": "monforje"
+      },
+      "category": "testing",
+      "source": "."
+    }
+  ]
+}
