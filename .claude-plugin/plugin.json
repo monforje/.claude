@@ -15,6 +15,7 @@
     "./agents/qa/qa-usability-ui.md"
   ],
   "skills": [
-    "./skills/qa/unit-testing"
+    "./skills/qa/unit-testing",
+    "./skills/qa/integration-testing"
   ]
 }

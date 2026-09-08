@@ -53,5 +53,6 @@ Renaming the plugin renames every agent and skill, so the table in
 
 ## Status
 
-`qa-unit` and its `unit-testing` skill are implemented. The other eight
-sub-agents are frontmatter-only stubs.
+`qa-unit` (`unit-testing` skill) and `qa-integration`
+(`integration-testing` skill) are implemented. The other seven sub-agents are
+frontmatter-only stubs.
