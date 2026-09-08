@@ -1,0 +1,11 @@
+{
+  "name": "docker-suite",
+  "description": "Docker agent and skill: images, compose environments, and build/run debugging on one machine",
+  "version": "0.0.1",
+  "agents": [
+    "./agents/docker.md"
+  ],
+  "skills": [
+    "./skills/docker"
+  ]
+}

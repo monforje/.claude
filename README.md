@@ -1,58 +1,54 @@
-# qa-suite
+# monforje plugins
 
-A QA orchestrator plus specialised verification sub-agents, packaged as a
-Claude Code plugin.
+A personal Claude Code plugin marketplace. Each plugin under `plugins/` is
+installed and versioned on its own.
 
-| Component | Location | Name in a session |
+| Plugin | What it is | Status |
 | --- | --- | --- |
-| Orchestrator | `agents/qa.md` | `qa-suite:qa` |
-| Sub-agents | `agents/qa/*.md` | `qa-suite:qa-<name>` |
-| Skills | `skills/qa/*/SKILL.md` | `qa-suite:<skill-name>` |
+| [`qa-suite`](plugins/qa-suite) | QA orchestrator and nine specialised verification sub-agents | `qa-unit` and `qa-integration` implemented, seven stubs |
+| [`docker-suite`](plugins/docker-suite) | Docker agent and skill — images, compose environments, build/run debugging | scaffold only, no content yet |
 
 ## Install
 
 ```bash
-claude plugin marketplace add monforje/qa-suite
+claude plugin marketplace add monforje/claude-plugins
 claude plugin install qa-suite@monforje
 ```
 
 Components load at session start, so restart the session after installing.
-Verify with `claude plugin details qa-suite`, or type `@qa-suite:` in a session
-and let autocomplete list the agents. (`plugin details` reports `Agents (0)` —
-it does not count agents declared as explicit paths. They do load.)
+Verify with `claude plugin details <name>`, or type `@qa-suite:` in a session and
+let autocomplete list the agents. (`plugin details` reports `Agents (0)` — it
+does not count agents declared as explicit paths. They do load.)
 
 ## Develop
 
-An install is a cached copy, so edits to a clone are not picked up. To work on
-the plugin, link the checkout instead:
+An install is a cached copy, so edits to a clone are not picked up. Link the
+plugin you are working on instead:
 
 ```bash
-ln -s /path/to/qa-suite ~/.claude/skills/qa-suite
+ln -s /path/to/claude-plugins/plugins/qa-suite ~/.claude/skills/qa-suite
 ```
 
-A directory under `~/.claude/skills/` that contains `.claude-plugin/plugin.json`
-auto-loads as a plugin, so every new session sees the current files with no
-reinstall step. For a one-off session: `claude --plugin-dir /path/to/qa-suite`.
+The symlink points at the **plugin** directory — the one containing
+`.claude-plugin/plugin.json` — not at the repository root. The root holds
+`marketplace.json` and is not itself a plugin, so linking it loads nothing.
+Link only the plugins you want live in every session; a plugin still under
+construction is better left unlinked than filling the skill list with
+placeholders.
 
-## Adding a component
+For a one-off session: `claude --plugin-dir /path/to/claude-plugins/plugins/qa-suite`.
 
-Everything is declared in `.claude-plugin/plugin.json`, and that declaration is
-what makes the nested layout work:
+## Layout
 
-- **A skill** must be listed under `skills` as a directory path. Skill
-  auto-discovery only looks one level deep (`skills/<name>/SKILL.md`), so a
-  skill at `skills/qa/<name>/` is invisible unless it is declared.
-- **An agent** is auto-discovered recursively, but then the subdirectory lands in
-  its name (`qa-suite:qa:qa-unit`). Listing it under `agents` gives the clean
-  `qa-suite:qa-unit`, which is what `agents/qa.md` section 2 refers to.
-- **`tools:` in an agent's frontmatter is a strict allowlist.** An agent that
-  needs to invoke a skill must list `Skill`, or it sees no skills at all.
+```
+.claude-plugin/marketplace.json   one entry per plugin, source: ./plugins/<name>
+plugins/<name>/
+├── .claude-plugin/plugin.json    agents and skills declared as explicit paths
+├── agents/
+├── skills/
+└── README.md
+```
 
-Renaming the plugin renames every agent and skill, so the table in
-`agents/qa.md` section 2 has to be updated along with it.
-
-## Status
-
-`qa-unit` (`unit-testing` skill) and `qa-integration`
-(`integration-testing` skill) are implemented. The other seven sub-agents are
-frontmatter-only stubs.
+Adding a plugin means a directory under `plugins/` with its own
+`.claude-plugin/plugin.json`, plus an entry in `marketplace.json` pointing at it.
+Nothing else is wired up globally.

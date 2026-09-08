@@ -60,30 +60,41 @@ Scope containers to the session, not to the test — a container per test turns 
 30-second suite into a 10-minute one. Combine session-scoped containers with
 per-test truncation (see `databases.md`).
 
-## docker compose
+## What the test environment has to satisfy
 
-Used when the project already has a compose file. Two rules:
+Whatever brings it up — testcontainers, a compose file, a fixture — these are the
+properties the tests depend on. Check them; if the project's harness violates one,
+that is a finding.
 
-- **Wait on a healthcheck, not on a sleep.** `depends_on: condition:
-  service_healthy` with a real `healthcheck` (`pg_isready`, a broker probe).
-  "Port is open" is not "ready to accept queries", and the gap between them is
-  where the first test of every run fails.
-- **Do not hard-code host ports** in the test compose file. A fixed `5432:5432`
-  collides with the developer's own database and with a parallel CI job; publish
-  an ephemeral port and read it back, or run the suite inside the compose
-  network.
+- **Ephemeral.** Created for the run and thrown away, never a long-lived stack
+  that accumulates state between runs.
+- **Readiness gated on a real check**, not on a sleep and not on "the port is
+  open". A port accepting connections is not a database accepting queries, and
+  the gap between them is where the first test of every run fails.
+- **No fixed host ports.** A hard-coded `5432:5432` collides with the developer's
+  own database and with a parallel CI job. Publish an ephemeral port and read it
+  back, or run the suite inside the environment's own network.
+- **Isolated from anything anyone uses.** See the hard rule in SKILL.md: the
+  connection string comes from what the run started, never from the project's
+  `.env`.
+- **Reproducible from nothing.** `git clone` plus one command, with migrations
+  applied by the project's own tooling.
 
-Reuse the project's file. If a variant is needed, extend the existing one
-(`docker compose -f docker-compose.yml -f docker-compose.test.yml`) rather than
-writing a parallel stack.
+Authoring the compose file or image that satisfies this is Docker work, not QA
+work. If the project already has one, reuse it — extend the existing file rather
+than writing a parallel stack. If it has none, the `docker-suite` plugin's
+`docker` skill covers writing one when it is installed; otherwise propose the
+smallest thing that meets the list above and let the user decide (SKILL.md,
+"Start with the harness"). What lives here is the requirement, not the recipe.
 
 ## Teardown
 
 Stop what you started; leave alone what was already running when you arrived. If
 the environment was up before the run, tearing it down destroys state that was
-not yours to destroy — reuse it and say so in the report. Named volumes survive
-`docker compose down` by design, which is why the "fresh environment" check in
-the SKILL.md checklist uses `down -v`.
+not yours to destroy — reuse it and say so in the report. Named volumes outlive an
+ordinary stop by design, so the "fresh environment" check in the SKILL.md
+checklist is only meaningful if the volumes go with them — otherwise it re-runs
+against yesterday's data and proves nothing.
 
 ## Stubbing third-party HTTP
 

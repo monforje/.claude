@@ -13,7 +13,16 @@
         "name": "monforje"
       },
       "category": "testing",
-      "source": "."
+      "source": "./plugins/qa-suite"
+    },
+    {
+      "name": "docker-suite",
+      "description": "Docker agent and skill: images, compose environments, and build/run debugging on one machine",
+      "author": {
+        "name": "monforje"
+      },
+      "category": "devops",
+      "source": "./plugins/docker-suite"
     }
   ]
 }
