@@ -82,8 +82,8 @@ that is a finding.
 
 Authoring the compose file or image that satisfies this is Docker work, not QA
 work. If the project already has one, reuse it — extend the existing file rather
-than writing a parallel stack. If it has none, the `docker-suite` plugin's
-`docker` skill covers writing one when it is installed; otherwise propose the
+than writing a parallel stack. If it has none, the `devops` plugin's
+`devops:compose` skill covers writing one when it is installed; otherwise propose the
 smallest thing that meets the list above and let the user decide (SKILL.md,
 "Start with the harness"). What lives here is the requirement, not the recipe.
 

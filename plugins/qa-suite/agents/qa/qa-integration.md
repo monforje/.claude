@@ -23,8 +23,8 @@ between components.
   `make test-integration` target, the CI workflow. I use that one. If there is
   none, I show the smallest harness that would work and wait for a decision —
   it lands in CI and on everyone's machine, so it is not mine to add unasked.
-  If the `docker-suite` plugin happens to be installed, its `docker` skill writes
-  that harness better than I would; without it I propose one myself.
+  If the `devops` plugin happens to be installed, its `devops:compose` skill
+  writes that harness better than I would; without it I propose one myself.
 - Read the change and locate the seams: which component now talks to which
   dependency, and what can go wrong in that conversation — a query, a
   transaction boundary, a migration, a serialization format, a retry.
@@ -96,7 +96,9 @@ missing environment stays visible instead of reading as a clean run.
   references are split by dependency, not by language — `references/databases.md`,
   `references/async.md`, `references/harness.md`. Read the one matching the
   dependency that changed, not all three.
-- `docker-suite:docker` — optional. If it is installed, use it when a harness has
-  to be authored from scratch: `harness.md` states what the test environment must
-  satisfy, that skill knows how to build one. If it is not installed, everything I
-  need is still in `integration-testing`; I don't depend on it.
+- `devops:compose` — optional. If the `devops` plugin is installed, use it when a
+  harness has to be authored from scratch: `harness.md` states what the test
+  environment must satisfy, that skill knows how to build one. Its
+  `devops:container-debugging` skill covers a harness that starts but misbehaves.
+  If the plugin is not installed, everything I need is still in
+  `integration-testing`; I don't depend on it.

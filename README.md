@@ -6,7 +6,7 @@ installed and versioned on its own.
 | Plugin | What it is | Status |
 | --- | --- | --- |
 | [`qa-suite`](plugins/qa-suite) | QA orchestrator and nine specialised verification sub-agents | `qa-unit` and `qa-integration` implemented, seven stubs |
-| [`docker-suite`](plugins/docker-suite) | Docker agent and skill — images, compose environments, build/run debugging | scaffold only, no content yet |
+| [`devops`](plugins/devops) | Docker, Compose, Traefik and Taskfile — three agents, five skills, three commands | implemented |
 
 ## Install
 

@@ -32,5 +32,6 @@ Renaming the plugin renames every agent and skill, so the table in
 `qa-unit` (`unit-testing` skill) and `qa-integration` (`integration-testing`
 skill) are implemented. The other seven sub-agents are frontmatter-only stubs.
 
-`qa-integration` can use `docker-suite:docker` when that plugin is installed, but
-does not require it — everything it needs is in its own skill.
+`qa-integration` can use the `devops` plugin's `devops:compose` skill when that
+plugin is installed, but does not require it — everything it needs is in its own
+skill.

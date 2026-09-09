@@ -1,0 +1,20 @@
+{
+  "name": "devops",
+  "description": "Docker, Compose, Traefik and Taskfile: writing, running and debugging a stack on one machine",
+  "version": "0.1.0",
+  "author": {
+    "name": "monforje"
+  },
+  "agents": [
+    "./agents/docker.md",
+    "./agents/traefik.md",
+    "./agents/taskfile.md"
+  ],
+  "skills": [
+    "./skills/devops/dockerfile",
+    "./skills/devops/compose",
+    "./skills/devops/traefik",
+    "./skills/devops/taskfile",
+    "./skills/devops/container-debugging"
+  ]
+}

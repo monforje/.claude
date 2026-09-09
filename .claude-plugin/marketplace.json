@@ -16,13 +16,13 @@
       "source": "./plugins/qa-suite"
     },
     {
-      "name": "docker-suite",
-      "description": "Docker agent and skill: images, compose environments, and build/run debugging on one machine",
+      "name": "devops",
+      "description": "Docker, Compose, Traefik and Taskfile: writing, running and debugging a stack on one machine",
       "author": {
         "name": "monforje"
       },
       "category": "devops",
-      "source": "./plugins/docker-suite"
+      "source": "./plugins/devops"
     }
   ]
 }
