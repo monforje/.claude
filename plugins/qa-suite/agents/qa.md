@@ -46,16 +46,18 @@ The `Subagent` value is the exact `subagent_type` to pass to Task. It is
 namespaced by the plugin, so it changes if the plugin is renamed in
 `.claude-plugin/plugin.json`.
 
-**Implementation status.** `qa-suite:qa-unit` and `qa-suite:qa-integration`
-have bodies today; the other seven files carry frontmatter and nothing else, so
-delegating to them returns noise. Until they are written, if the change needs one
-of them, say so in the report ("load risk not covered — qa-load not implemented")
-rather than calling it and pretending the result means something.
+**Implementation status.** `qa-suite:qa-unit`, `qa-suite:qa-integration`, and
+`qa-suite:qa-load` have bodies today; the other six files carry frontmatter and
+nothing else, so delegating to them returns noise. Until they are written, if the
+change needs one of them, say so in the report ("security risk not covered —
+qa-security not implemented") rather than calling it and pretending the result
+means something.
 
-`qa-integration` reports an uncovered level the same way when it cannot run at
-all — no container runtime available, or the user declined to add a test harness
-— returning `[major] integration risk not covered — <reason>`. Carry that finding
-into the report; it keeps the run out of `status: success`.
+`qa-integration` and `qa-load` report an uncovered level the same way when they
+cannot run at all — no container runtime available and a declined test harness
+for the former, no safe environment or no permission to load it for the latter —
+returning `[major] <level> risk not covered — <reason>`. Carry that finding into
+the report; it keeps the run out of `status: success`.
 
 ## 3. Process
 

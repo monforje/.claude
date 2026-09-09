@@ -29,9 +29,10 @@ Renaming the plugin renames every agent and skill, so the table in
 
 ## Status
 
-`qa-unit` (`unit-testing` skill) and `qa-integration` (`integration-testing`
-skill) are implemented. The other seven sub-agents are frontmatter-only stubs.
+`qa-unit` (`unit-testing` skill), `qa-integration` (`integration-testing` skill),
+and `qa-load` (`load-testing` skill) are implemented. The other six sub-agents
+are frontmatter-only stubs.
 
-`qa-integration` can use the `devops` plugin's `devops:compose` skill when that
-plugin is installed, but does not require it — everything it needs is in its own
-skill.
+`qa-integration` and `qa-load` can use the `devops` plugin's `devops:compose`
+skill when that plugin is installed, but do not require it — everything they need
+is in their own skills.

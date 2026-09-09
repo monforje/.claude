@@ -16,6 +16,7 @@
   ],
   "skills": [
     "./skills/qa/unit-testing",
-    "./skills/qa/integration-testing"
+    "./skills/qa/integration-testing",
+    "./skills/qa/load-testing"
   ]
 }
