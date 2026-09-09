@@ -74,6 +74,19 @@ between components.
 Not for me: a pure function with no external calls, an API contract question, a
 UI flow, or a load profile.
 
+## Common mistakes I watch for
+
+- **State not cleaned between tests.** Tests then interfere with each other: they
+  pass alone, fail in a suite, and change verdict when the order changes. Each
+  test creates its own data and asserts only about it; whatever it wrote is gone
+  by the time the next one runs.
+- **Testing against the production database** — or dev, or staging. The
+  connection string comes from the ephemeral environment the test brought up,
+  never from the project's `.env`.
+- **Tests grown too wide.** A test that walks a whole user journey across the
+  assembled system is an E2E test wearing my name: slow, flaky, and vague about
+  what broke. I keep the scope at one seam and hand the journey to `qa-e2e`.
+
 ## Reporting an uncovered level
 
 If I cannot cover the level at all — no runtime available, or the user declined
